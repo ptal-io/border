@@ -13,14 +13,17 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </script>
 
 	<style>
 		html, body {
 			height: 100%;
 			margin: 0;
+			font-family: "Nunito", sans-serif;
 		}
 		.leaflet-container {
 			height: 400px;
@@ -37,13 +40,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 <div id="map" style="width: 100%; height: 100%;"></div>
-<div id="chart" style='position:absolute;background-color:#fff;z-index:500;bottom:10px;width:800px;left:50%;margin-left:-400px;border-radius:2px;height:400px;'>
+<div id="sidepanel" style="position:absolute;right:0;width:600px;top:0;bottom:0;z-index:499;background-color:#fff"></div>
+<div id="chart" style='position:absolute;background-color:#fff;z-index:500;bottom:10px;width:550px;right:25px;height:400px;'>
 	<div id='charttitle'>
 		<div id="chartname" style='font-weight:bold;font-size:1.3em;padding:10px;'></div>
 		<div id="chartstate" style='font-weight:bold;font-size:1em;padding-left:10px;'></div>
 	</div>
 	<canvas id="myChart" style="width:100%;height:300px"></canvas>
-
+	<div id="myChart2" style="width:100%;height:300px;display:none;margin-top:20px;text-align:center">Not enough data</div>
 </div>
 <script>
 
@@ -71,10 +75,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
         const marker = L.marker([lat, lng])
           .addTo(map)
-          .bindPopup(`<strong>${name}</strong><br>${state}<br>${portc}`);
+          .bindPopup(`<strong>${name}</strong><br>${state}`);
 
         marker.on('click', function (e) {
-		  console.log('Marker clicked:', e.target); // or `this` refers to the marker
+		  //console.log('Marker clicked:', e.target); // or `this` refers to the marker
 		  // You can also manually open the popup if needed
 		  this.openPopup();
 
@@ -99,6 +103,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     	document.getElementById('chartname').innerHTML = name;
     	document.getElementById('chartstate').innerHTML = stated;
     	if (_stats.hasOwnProperty(port)) {
+    		document.getElementById('myChart2').style.display = 'none';
+			document.getElementById('myChart').style.display = 'block';
 	    	var p = _stats[port];
 	    	var x = 0;
 	    	var yvals = [];
@@ -155,12 +161,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 			}
 			});
 		} else {
-			const canvas = document.getElementById("myChart");
-			  const ctx = canvas.getContext("2d");
-
-			  ctx.font = "12px Roboto";
-			  ctx.fillStyle = "black";
-			  ctx.fillText("Not enough data", 50, 75); // (x=50, y=75)
+			document.getElementById('myChart').style.display = 'none';
+			document.getElementById('myChart2').style.display = 'block';
 		}
     }	
 
