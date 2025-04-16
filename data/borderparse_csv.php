@@ -70,7 +70,7 @@
 
 		foreach($val as $year=>$val2) {
 			foreach($val2 as $month=>$val3) {
-				if ($year < 2025) {
+				if ($year == 2024) {
 					if (!isset($pre2025[$portcode][$month]))
 						$pre2025[$portcode][$month] = array();
 					if (property_exists($val3->vehicle, 'car'))
@@ -145,11 +145,17 @@
 		}
 	} 
 
-	$fout = fopen("diff.csv","w");
-
+	$output = array();
 	foreach($prov as $key=>$val) {
-		fwrite($fout, $key . "," . $val[1][0] . "," . $val[1][1] . "," . $val[2][0] . "," . $val[2][1] . "," . $val[3][0] . "," . $val[3][1]."\n");
+		$key = explode("/", $key);
+		$key = trim($key[0]);
+		$output[$key] = array();
+		$output[$key][1] = round(($val[1][0]-$val[1][1])/$val[1][0]*-1000)/10;
+		$output[$key][2] = round(($val[2][0]-$val[2][1])/$val[2][0]*-1000)/10;
+		$output[$key][3] = round(($val[3][0]-$val[3][1])/$val[3][0]*-1000)/10;
 	}
 
-	var_dump($prov);
+
+	file_put_contents('prov.json', json_encode($output));
+
 ?>

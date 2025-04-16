@@ -57,6 +57,7 @@
 	echo count($monthly) . "\n";
 
 	foreach($monthly as $key=>$val) {
+	
 		if (!isset($val[2025]) || count($val[2025]) < 3) {
 			unset($monthly[$key]);
 		} else {
