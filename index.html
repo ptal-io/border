@@ -4,22 +4,22 @@
 	<!-- Author: Grant McKenzie grant.mckenzie@mcgill.ca -->
 
 	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0C5X0628W2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-0C5X0628W2"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-  gtag('config', 'G-0C5X0628W2');
-</script>
+	  gtag('config', 'G-0C5X0628W2');
+	</script>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>US Northern Land Border Traveler Crossings</title>
+	<title>US Northern Land Border Crossings</title>
 
 	<!-- Primary Meta Tags -->
-	<meta name="title" content="US Northern Land Border Traveler Crossings">
+	<meta name="title" content="US Northern Land Border Crossings">
 	<meta name="description" content="">
 
 	<!-- Open Graph / Facebook -->
@@ -29,107 +29,36 @@
 	<meta property="og:description" content="">
 	<meta property="og:image" content="https://ptal-io.github.io/border/img/teaser.png">
 
-	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="https://ptal-io.github.io/border/">
-	<meta property="twitter:title" content="US Northern Land Border Traveler Crossings">
+	<meta property="twitter:title" content="US Northern Land Border Crossings">
 	<meta property="twitter:description" content="">
 	<meta property="twitter:image" content="https://ptal-io.github.io/border/img/teaser.png">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+   
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/leaflet.css"/>
+	<link rel="stylesheet" href="css/main.css"/>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-</script>
-
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-			font-family: "Nunito", sans-serif;
-			font-size: 12pt;
-		}
-		.leaflet-container {
-			height: 400px;
-			width: 600px;
-			max-width: 100%;
-			max-height: 100%;
-		}
-		#myChart {
-		  max-width: 550px;
-		  height: 300px;
-		}
-		#title {
-			padding:11px;
-			margin-top:20px;
-			font-weight:bold;
-			font-size:1.7em;
-		}
-		.instructions {
-			padding:11px;
-			margin-top:10px;
-		}
-		#about {
-			width:700px;
-			height:400px;
-			margin-left:-350px;
-			margin-top:-200px;
-			position:absolute;
-			z-index:550;
-			border-radius:2px;
-			top:50%;
-			left:50%;
-			background-color:#fff;
-			display:none;
-			padding:20px;
-		}
-		#wrapperAbout {
-			position:absolute;
-			width:100%;
-			height:100%;
-			background-color:#333;
-			opacity: 0.5;
-			z-index:501;
-			display:none;
-		}
-		#moreinfo {
-			padding-right:20px;
-			float:right;
-			margin-bottom:20px;
-			cursor:pointer;
-			text-decoration: underline;
-			color: blue;
-		}
-		.color-green     { background-color: #1a9850; color: white; }
-		.color-lightgreen{ background-color: #91cf60; color: black; }
-		.color-yellow    { background-color: #ffffbf; color: black; }
-		.color-orange    { background-color: #fc8d59; color: black; }
-		.color-red       { background-color: #d73027; color: white; }
-		.table-cell      { padding: 6px 10px; text-align: right; }
-		.table-head      { font-weight: bold; text-align: left; padding: 6px 10px; background-color: #eee; }
-
-	</style>
-
-	
 </head>
 <body>
 
-
 <div id="about">
+	<img id='close' style='float:right;cursor:pointer' src='img/close.png' />
 	<h2>About This Project</h2>
-<p>This interactive visualization presents data on travelers entering the United States from Canada via land border crossings. By selecting a port on the map, users can explore trends in the number of passengers in personal vehicles as well as pedestrians crossing into the U.S. at that location.
+<p>This interactive visualization presents data on travelers entering the United States from Canada via land border crossings. By selecting a port (marker) on the map, users can explore trends in the number of passengers in personal vehicles as well as pedestrians crossing into the U.S. at that location.
 </p><p>
 The data is sourced from U.S. Customs and Border Protection (CBP) and is publicly available via the <a href="https://www.cbp.gov/document/stats/traveler-and-conveyance-statistics" target="_blank">Traveler and Conveyance Statistics portal</a>. This platform includes only entries from Canadian land borders and excludes travelers arriving by air and water as well as passengers in commercial trucks.
 </p>
-Developed by <a href="https://platial.science">The Platial Analysis Lab</a>.
+<p>
+Developed by <a href="https://platial.science">The Platial Analysis Lab</a>.</p><p>Contact Grant McKenzie at <a href="mailto:grant.mckenzie@mcgill.ca">grant.mckenzie@mcgill.ca</a> with any questions.</p>
 </div>
 <div id="wrapperAbout"></div>
 <div id="map" style="width: 100%; height: 100%;"></div>
 <div id="sidepanel" style="position:absolute;right:0;width:600px;top:0;bottom:0;z-index:499;background-color:#fff;overflow-y:auto;overflow-x:hidden">
-	<div id="title">US Northern Land Border Traveler Crossings</div>
+	<div id="title">US Northern Land Border Crossings</div>
 	<div class="instructions" id="instructions">
 		Click a border crossing marker on the map to view details.
 	</div>
@@ -147,203 +76,9 @@ Developed by <a href="https://platial.science">The Platial Analysis Lab</a>.
 	</div>
 	<div id="moreinfo">Click for more information</div>
 </div>
-<script>
 
-	document.getElementById("wrapperAbout").addEventListener("click", function(event) {
-	  document.getElementById('wrapperAbout').style.display = "none";
-	  document.getElementById('about').style.display = "none";
-	});
-
-	document.getElementById("moreinfo").addEventListener("click", function(event) {
-	  document.getElementById('wrapperAbout').style.display = "block";
-	  document.getElementById('about').style.display = "block";
-	});
-
-	const map = L.map('map').setView([55, -73], 4);
-
-
-	const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
-		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-		subdomains: 'abcd',
-		maxZoom: 20
-	}).addTo(map);
-
-	var customIcon = L.icon({
-	    iconUrl: 'img/marker.png', // e.g., 'images/marker-icon.png'
-	    iconSize: [30, 38],       // size of the icon
-	    iconAnchor: [15, 38],     // point of the icon which will correspond to marker's location
-	    popupAnchor: [0, -38]     // point from which the popup should open relative to the iconAnchor
-	});
-
-  const portMarkers = {};
-
-  var _stats = null;
-  let myChartInstance = null;
-
-  // Step 1: Load and plot initial markers
-  fetch('data/ports.json')
-    .then(response => response.json())
-    .then(portData => {
-      Object.entries(portData).forEach(([portcode, port]) => {
-        const lat = parseFloat(port.lat);
-        const lng = parseFloat(port.lng);
-        const name = port.name;
-        const state = port.state;
-        const portc = port.portcode;
-
-        const marker = L.marker([lat, lng], { icon: customIcon })
-          .addTo(map)
-          .bindPopup(`<strong>${name}</strong><br>${state}`);
-
-        marker.on('click', function (e) {
-		  //console.log('Marker clicked:', e.target); // or `this` refers to the marker
-		  // You can also manually open the popup if needed
-		  this.openPopup();
-		  document.getElementById('instructions').style.display = 'none';
-		  setChart(port.portcode, port.name, port.state);
-		});
-
-        // Store marker by portcode
-        portMarkers[portcode] = marker;
-      });
-
-      // Step 2: Load additional data and update popups
-      fetch('data/data.json')
-        .then(response => response.json())
-        .then(statsData => {
-           _stats = statsData;
-        });
-    });
-
-
-    function setChart(port, name, stated) {
-  document.getElementById('chartname').innerHTML = name;
-  document.getElementById('chartstate').innerHTML = stated;
-
-  if (_stats.hasOwnProperty(port)) {
-    document.getElementById('myChart2').style.display = 'none';
-    document.getElementById('myChart').style.display = 'block';
-
-    var p = _stats[port];
-    var xlab = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
-    var yvals = {};
-
-    for (let year in p) {
-      yvals[year] = [];
-      for (let month in p[year]) {
-        if (year == 2025 && month > 3) continue;
-        yvals[year].push(p[year][month].vehicle.car);
-      }
-    }
-
-    const datasets = [
-      {
-        data: yvals[2022],
-        label: "2022",
-        borderColor: "#41b6c4",
-        fill: false,
-        lineTension: 0.4
-      },
-      {
-        data: yvals[2023],
-        label: "2023",
-        borderColor: "#1d91c0",
-        fill: false,
-        lineTension: 0.4
-      },
-      {
-        data: yvals[2024],
-        label: "2024",
-        borderColor: "#225ea8",
-        fill: false,
-        lineTension: 0.4
-      },
-      {
-        data: yvals[2025],
-        label: "2025",
-        borderColor: "#0c2c84",
-        fill: false,
-        borderWidth: 6,
-        lineTension: 0.4
-      }
-    ];
-
-    // If chart doesn't exist, create it
-    if (!myChartInstance) {
-      const ctx = document.getElementById("myChart").getContext("2d");
-      myChartInstance = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: xlab,
-          datasets: datasets
-        },
-        options: {
-		  animation: {
-		    x: {
-		      duration: 1000,
-		      easing: 'easeOutExpo'
-		    },
-		    y: {
-		      duration: 1000,
-		      easing: 'easeOutExpo'
-		    }
-		  }
-		}
-      });
-    } else {
-      myChartInstance.data.datasets.forEach((ds, idx) => {
-		  ds.data = datasets[idx].data;
-		});
-		myChartInstance.update();
-    }
-
-  } else {
-    document.getElementById('myChart').style.display = 'none';
-    document.getElementById('myChart2').style.display = 'block';
-  }
-}
-
-fetch('data/prov.json')
-  .then(response => response.json())
-  .then(provData => {
-    const container = document.getElementById("provinceTable");
-    const months = ["January", "February", "March"];
-    const monthKeys = ["1", "2", "3"];
-
-    // Define breakpoints for 5 classes (green = high positive, red = low negative)
-    function getColorClass(value) {
-      if (value >= 5) return "color-green";
-      else if (value >= 0) return "color-lightgreen";
-      else if (value >= -10) return "color-yellow";
-      else if (value >= -25) return "color-orange";
-      else return "color-red";
-    }
-
-    // Sort province names alphabetically
-    const sortedProvinces = Object.keys(provData).sort();
-
-    // Build HTML table
-    let html = '<table><thead><tr><th class="table-head" style="width:220px">Province of Departure</th>';
-    months.forEach(m => html += `<th class="table-head">${m}</th>`);
-    html += '</tr></thead><tbody>';
-
-    sortedProvinces.forEach(prov => {
-      html += `<tr><td class="table-cell" style="text-align:left;">${prov}</td>`;
-      monthKeys.forEach(k => {
-        const val = provData[prov][k];
-        const cls = getColorClass(val);
-        html += `<td class="table-cell ${cls}">${val.toFixed(1)}%</td>`;
-      });
-      html += '</tr>';
-    });
-
-    html += '</tbody></table>';
-    container.innerHTML = html;
-  });
-
-</script>
-
-
-
+    <script src="js/leaflet.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
