@@ -121,7 +121,7 @@ Developed by <a href="https://platial.science">The Platial Analysis Lab</a>.
 	  document.getElementById('about').style.display = "block";
 	});
 
-	const map = L.map('map').setView([44.00, -93], 5);
+	const map = L.map('map').setView([44.00, -83], 4);
 
 
 	const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
@@ -132,9 +132,9 @@ Developed by <a href="https://platial.science">The Platial Analysis Lab</a>.
 
 	var customIcon = L.icon({
 	    iconUrl: 'img/marker.png', // e.g., 'images/marker-icon.png'
-	    iconSize: [30, 43],       // size of the icon
-	    iconAnchor: [15, 43],     // point of the icon which will correspond to marker's location
-	    popupAnchor: [0, -43]     // point from which the popup should open relative to the iconAnchor
+	    iconSize: [30, 38],       // size of the icon
+	    iconAnchor: [15, 38],     // point of the icon which will correspond to marker's location
+	    popupAnchor: [0, -38]     // point from which the popup should open relative to the iconAnchor
 	});
 
   const portMarkers = {};
