@@ -2,12 +2,18 @@
 	document.getElementById("wrapperAbout").addEventListener("click", function(event) {
 	  document.getElementById('wrapperAbout').style.display = "none";
 	  document.getElementById('about').style.display = "none";
+    document.getElementById('provdetails').style.display = "none";
 	});
 
 	document.getElementById("close").addEventListener("click", function(event) {
 	  document.getElementById('wrapperAbout').style.display = "none";
 	  document.getElementById('about').style.display = "none";
 	});
+
+  document.getElementById("close2").addEventListener("click", function(event) {
+    document.getElementById('wrapperAbout').style.display = "none";
+    document.getElementById('provdetails').style.display = "none";
+  });
 
 	document.getElementById("moreinfo").addEventListener("click", function(event) {
 	  document.getElementById('wrapperAbout').style.display = "block";
@@ -33,12 +39,14 @@
   const portMarkers = {};
 
   var _stats = null;
+  var allports = null;
   let myChartInstance = null;
 
   // Step 1: Load and plot initial markers
   fetch('data/ports.json')
     .then(response => response.json())
     .then(portData => {
+      allports = portData;
       Object.entries(portData).forEach(([portcode, port]) => {
         const lat = parseFloat(port.lat);
         const lng = parseFloat(port.lng);
@@ -158,6 +166,15 @@
   }
 }
 
+function getColorClass(value) {
+  if (value >= 5) return "color-green";
+  else if (value >= 0) return "color-lightgreen";
+  else if (value >= -10) return "color-yellow";
+  else if (value >= -20) return "color-orange";
+  else if (value >= -30) return "color-red";
+  else return "color-deepred";
+}
+
 fetch('data/prov.json')
   .then(response => response.json())
   .then(provData => {
@@ -166,13 +183,7 @@ fetch('data/prov.json')
     const monthKeys = ["1", "2", "3"];
 
     // Define breakpoints for 5 classes (green = high positive, red = low negative)
-    function getColorClass(value) {
-      if (value >= 5) return "color-green";
-      else if (value >= 0) return "color-lightgreen";
-      else if (value >= -10) return "color-yellow";
-      else if (value >= -25) return "color-orange";
-      else return "color-red";
-    }
+
 
     // Sort province names alphabetically
     const sortedProvinces = Object.keys(provData).sort();
@@ -183,7 +194,7 @@ fetch('data/prov.json')
     html += '</tr></thead><tbody>';
 
     sortedProvinces.forEach(prov => {
-      html += `<tr><td class="table-cell" style="text-align:left;">${prov}</td>`;
+      html += `<tr><td class="table-cell" style="cursor:pointer;color:#32a6c3;text-align:left;" onclick="loadprov(\'${prov}\')");">${prov}</td>`;
       monthKeys.forEach(k => {
         const val = provData[prov][k];
         const cls = getColorClass(val);
@@ -195,3 +206,67 @@ fetch('data/prov.json')
     html += '</tbody></table>';
     container.innerHTML = html;
   });
+
+  var ports_provs = [];
+  fetch('data/ports.geojson')
+  .then(response => response.json())
+  .then(data => {
+    ports_provs = data;
+    for(feat in data.features) {
+      prov = data.features[feat].properties.PRNAME.split("/")[0].trim();
+      portcode = data.features[feat].properties.portcode;
+      if (!Array.isArray(ports_provs[prov])) {
+        ports_provs[prov] = [];
+      }
+      ports_provs[prov].push(portcode);
+    }
+  })
+  .catch(error => {
+    console.error('Error loading GeoJSON:', error);
+  });
+
+
+  function loadprov(prov) {
+    document.getElementById('wrapperAbout').style.display = "block";
+    document.getElementById('provdetails').style.display = "block";
+    document.getElementById('provname').innerHTML = "Border Crossings in "+prov;
+
+    var s = null;
+    var missing = 0;
+    content = '<table><thead><tr><th class="table-head" style="width:220px">Border Crossing</th>';
+    const months = ["January", "February", "March"];
+    months.forEach(m => content += `<th class="table-head">${m}</th>`);
+    content += '</tr></thead><tbody>';
+
+    for (port in ports_provs[prov]) {
+      pp = String(ports_provs[prov][port]).padStart(4, '0');
+      if (typeof allports[pp] === "object" && allports[pp] !== null && typeof _stats[pp] === "object" && _stats[pp] !== null) {
+        s = _stats[pp];
+        f = allports[pp];
+        content += '<tr><td class="table-cell" style="width:350px;text-align:left;">' + f.name + " ("+f.state+") </td>";
+        
+        for(month in s[2025]) {
+          if (month < 5) {
+            var x = Math.round((s[2024][month].vehicle.car - s[2025][month].vehicle.car)/s[2024][month].vehicle.car*-1000)/10;
+            const cls = getColorClass(x);
+            content += `<td class="table-cell ${cls}">${x.toFixed(1)}%</td>`;
+            
+          }
+        }
+      } else {
+        missing++;
+      }
+      content += "</tr>";
+    }
+    content += '</tbody></table>';
+    if (missing > 0) {
+      content += "<div style='margin-top:10px;text-align:left;color:#660000'>";
+      if (missing == 1) {
+        content += "<i>Details for "+missing + " crossing is not reported due to not enough data.</i>"
+      } else if (missing > 1) {
+        content += "<i>Details for "+missing + " crossings are not reported due to not enough data.</i>"
+      }
+      content += "</div>";
+    }
+    document.getElementById('crossings').innerHTML = content;
+  }

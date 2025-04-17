@@ -67,9 +67,29 @@ a:hover {
 	top:50%;
 	left:50%;
 	background-color:#fff;
-	display:hidden;
+	display:none;
 	padding:20px;
 	font-size: 1.1em;
+}
+#provdetails {
+	width:700px;
+	max-height:500px;
+	margin-left:-370px;
+	margin-top:-210px;
+	position:absolute;
+	z-index:1050;
+	border-radius:2px;
+	top:50%;
+	left:50%;
+	background-color:#fff;
+	display:none;
+	padding:20px;
+	font-size: 1.1em;
+}
+#crossings {
+	max-height:440px;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 #wrapperAbout {
 	position:absolute;
@@ -78,7 +98,7 @@ a:hover {
 	background-color:#333;
 	opacity: 0.5;
 	z-index:1001;
-	display:hidden;
+	display:none;
 }
 #moreinfo {
 	cursor:pointer;
@@ -95,6 +115,7 @@ a:hover {
 .color-lightgreen{ background-color: #91cf60; color: black; }
 .color-yellow    { background-color: #ffffbf; color: black; }
 .color-orange    { background-color: #fc8d59; color: black; }
-.color-red       { background-color: #d73027; color: white; }
+.color-red       { background-color: #d53e4f; color: white; }
+.color-deepred   { background-color: #a50026; color: white; }
 .table-cell      { padding: 6px 10px; text-align: right; }
 .table-head      { font-weight: bold; text-align: left; padding: 6px 10px; background-color: #eee; }
