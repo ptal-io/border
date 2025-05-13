@@ -94,7 +94,7 @@
     for (let year in p) {
       yvals[year] = [];
       for (let month in p[year]) {
-        if (year == 2025 && month > 3) continue;
+        if (year == 2025 && month > 4) continue;
         yvals[year].push(p[year][month].vehicle.car);
       }
     }
@@ -179,8 +179,8 @@ fetch('data/prov.json')
   .then(response => response.json())
   .then(provData => {
     const container = document.getElementById("provinceTable");
-    const months = ["January", "February", "March"];
-    const monthKeys = ["1", "2", "3"];
+    const months = ["January", "February", "March", "April"];
+    const monthKeys = ["1", "2", "3", "4"];
 
     // Define breakpoints for 5 classes (green = high positive, red = low negative)
 
@@ -234,7 +234,7 @@ fetch('data/prov.json')
     var s = null;
     var missing = 0;
     content = '<table><thead><tr><th class="table-head" style="width:220px">Border Crossing</th>';
-    const months = ["January", "February", "March"];
+    const months = ["January", "February", "March", "April"];
     months.forEach(m => content += `<th class="table-head">${m}</th>`);
     content += '</tr></thead><tbody>';
 

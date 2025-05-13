@@ -63,7 +63,7 @@
 		} else {
 			$cnt = 0;
 			foreach($val[2025] as $month=>$val2) {
-				if (property_exists($val2->vehicle,'car') and $month < 4) {
+				if (property_exists($val2->vehicle,'car') and $month < 5) {
 					$cnt++;
 				}
 			}
