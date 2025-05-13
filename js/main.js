@@ -262,9 +262,9 @@ fetch('data/prov.json')
     if (missing > 0) {
       content += "<div style='margin-top:10px;text-align:left;color:#660000'>";
       if (missing == 1) {
-        content += "<i>Details for "+missing + " crossing is not reported due to not enough data.</i>"
+        content += "<i>Details for "+missing + " crossing is not reported due to a lack of data.</i>"
       } else if (missing > 1) {
-        content += "<i>Details for "+missing + " crossings are not reported due to not enough data.</i>"
+        content += "<i>Details for "+missing + " crossings are not reported due to a lack of data.</i>"
       }
       content += "</div>";
     }
