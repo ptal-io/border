@@ -94,7 +94,7 @@
     for (let year in p) {
       yvals[year] = [];
       for (let month in p[year]) {
-        if (year == 2025 && month > 4) continue;
+        if (year == 2025 && month > 5) continue;
         yvals[year].push(p[year][month].vehicle.car);
       }
     }
@@ -179,8 +179,8 @@ fetch('data/prov.json')
   .then(response => response.json())
   .then(provData => {
     const container = document.getElementById("provinceTable");
-    const months = ["January", "February", "March", "April"];
-    const monthKeys = ["1", "2", "3", "4"];
+    const months = ["January", "February", "March", "April", "May"];
+    const monthKeys = ["1", "2", "3", "4", "5"];
 
     // Define breakpoints for 5 classes (green = high positive, red = low negative)
 
@@ -234,7 +234,7 @@ fetch('data/prov.json')
     var s = null;
     var missing = 0;
     content = '<table><thead><tr><th class="table-head" style="width:220px">Border Crossing</th>';
-    const months = ["January", "February", "March", "April"];
+    const months = ["January", "February", "March", "April", "May"];
     months.forEach(m => content += `<th class="table-head">${m}</th>`);
     content += '</tr></thead><tbody>';
 
@@ -246,7 +246,7 @@ fetch('data/prov.json')
         content += '<tr><td class="table-cell" style="width:350px;text-align:left;">' + f.name + " ("+f.state+") </td>";
         
         for(month in s[2025]) {
-          if (month < 5) {
+          if (month < 6) {
             var x = Math.round((s[2024][month].vehicle.car - s[2025][month].vehicle.car)/s[2024][month].vehicle.car*-1000)/10;
             const cls = getColorClass(x);
             content += `<td class="table-cell ${cls}">${x.toFixed(1)}%</td>`;
