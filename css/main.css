@@ -57,9 +57,9 @@ a:hover {
 	font-weight:bold;
 }
 #about {
-	width:700px;
+	width:740px;
 	height:400px;
-	margin-left:-370px;
+	margin-left:-390px;
 	margin-top:-210px;
 	position:absolute;
 	z-index:1050;
@@ -72,9 +72,9 @@ a:hover {
 	font-size: 1.1em;
 }
 #provdetails {
-	width:700px;
+	width:740px;
 	max-height:500px;
-	margin-left:-370px;
+	margin-left:-390px;
 	margin-top:-310px;
 	position:absolute;
 	z-index:1050;
