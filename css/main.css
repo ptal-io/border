@@ -84,7 +84,7 @@ a:hover {
 	background-color:#fff;
 	display:none;
 	padding:20px;
-	font-size: 1.1em;
+	font-size: 0.8em;
 }
 #crossings {
 	max-height:440px;
@@ -114,11 +114,14 @@ a:hover {
 	width:550px;
 	padding:25px;
 }
+table {
+	border-spacing: 1px;
+}
 .color-green     { background-color: #1a9850; color: white; }
 .color-lightgreen{ background-color: #91cf60; color: black; }
 .color-yellow    { background-color: #ffffbf; color: black; }
 .color-orange    { background-color: #fc8d59; color: black; }
 .color-red       { background-color: #d53e4f; color: white; }
 .color-deepred   { background-color: #a50026; color: white; }
-.table-cell      { padding: 6px 10px; text-align: right; }
+.table-cell      { padding: 6px 6px; text-align: right; }
 .table-head      { font-weight: bold; text-align: left; padding: 6px 10px; background-color: #eee; }

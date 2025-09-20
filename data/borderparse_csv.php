@@ -19,7 +19,7 @@
 	   	$date = DateTime::createFromFormat('M', $line[2]);
 	   $month = (int)$date->format('n');
 	   $year = (int) $line[0];
-	   if ($line[3] == "Northern Border" and $year > 2022 and $month < 8) {
+	   if ($line[3] == "Northern Border" and $year > 2022 and $month < 9) {
 		   
 		   preg_match('/\((.*?)\)/', $line[6], $matches);
 		   $portcode = trim($matches[1]);
@@ -157,6 +157,7 @@
 		$output[$key][5] = round(($val[5][0]-$val[5][1])/$val[5][0]*-1000)/10;
 		$output[$key][6] = round(($val[6][0]-$val[6][1])/$val[6][0]*-1000)/10;
 		$output[$key][7] = round(($val[7][0]-$val[7][1])/$val[7][0]*-1000)/10;
+		$output[$key][8] = round(($val[8][0]-$val[8][1])/$val[8][0]*-1000)/10;
 	}
 
 
