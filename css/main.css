@@ -125,3 +125,13 @@ table {
 .color-deepred   { background-color: #a50026; color: white; }
 .table-cell      { padding: 6px 6px; text-align: right; }
 .table-head      { font-weight: bold; text-align: left; padding: 6px 10px; background-color: #eee; }
+
+
+canvas:hover {
+  cursor: default;
+}
+
+/* When hovering over the legend area */
+.chartjs-legend li:hover {
+  cursor: pointer;
+}

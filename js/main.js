@@ -178,34 +178,97 @@ function getColorClass(value) {
 fetch('data/prov.json')
   .then(response => response.json())
   .then(provData => {
-    const container = document.getElementById("provinceTable");
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug"];
-    const monthKeys = ["1", "2", "3", "4", "5", "6", "7","8"];
-
-    // Define breakpoints for 5 classes (green = high positive, red = low negative)
-
+    const ctx = document.getElementById("provinceChart").getContext("2d");
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+    const monthKeys = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
     // Sort province names alphabetically
     const sortedProvinces = Object.keys(provData).sort();
 
-    // Build HTML table
-    let html = '<table><thead><tr><th class="table-head" style="width:220px">Province of Departure</th>';
-    months.forEach(m => html += `<th class="table-head">${m}</th>`);
-    html += '</tr></thead><tbody>';
+    // Define a color palette
+    const colors = [
+      "#1b9e77", "#d95f02", "#7570b3", "#e7298a",
+      "#66a61e", "#e6ab02", "#a6761d", "#666666",
+      "#386cb0", "#f0027f", "#bf5b17", "#999999"
+    ];
 
-    sortedProvinces.forEach(prov => {
-      html += `<tr><td class="table-cell" style="cursor:pointer;color:#32a6c3;text-align:left;" onclick="loadprov(\'${prov}\')");">${prov}</td>`;
-      monthKeys.forEach(k => {
-        const val = provData[prov][k];
-        const cls = getColorClass(val);
-        html += `<td class="table-cell ${cls}">${val.toFixed(1)}%</td>`;
-      });
-      html += '</tr>';
+    // Build one dataset per province
+    const datasets = sortedProvinces.map((prov, i) => ({
+      label: prov,
+      data: monthKeys.map(k => provData[prov][k]),
+      borderColor: colors[i % colors.length],
+      borderWidth: 2,
+      fill: false,
+      tension: 0.3
+    }));
+
+    // Create the line chart
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: datasets
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 12,
+              usePointStyle: true
+            },
+            onClick: (evt, legendItem, legend) => {
+              const prov = legendItem.text; // dataset label = province name
+              // If you hold Alt/Option (or Ctrl/Cmd), also toggle visibility like default behavior
+              const toggleLikeDefault = evt.altKey || evt.ctrlKey || evt.metaKey || evt.shiftKey;
+
+              // Open the province details overlay
+              if (typeof loadprov === 'function') {
+                loadprov(prov); // uses your existing function to build & show the modal:contentReference[oaicite:3]{index=3}
+              }
+
+              // Optional: also toggle visibility when a modifier key is held
+              if (toggleLikeDefault) {
+                const ci = legend.chart;
+                const index = legendItem.datasetIndex;
+                ci.toggleDataVisibility(index);
+                ci.update();
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: context => `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Month'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '% Change'
+            },
+            beginAtZero: false
+          }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
     });
-
-    html += '</tbody></table>';
-    container.innerHTML = html;
   });
+
 
   var ports_provs = [];
   fetch('data/ports.geojson')
