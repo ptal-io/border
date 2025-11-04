@@ -94,7 +94,7 @@
     for (let year in p) {
       yvals[year] = [];
       for (let month in p[year]) {
-        if (year == 2025 && month > 8) continue;
+        if (year == 2025 && month > 9) continue;
         yvals[year].push(p[year][month].vehicle.car);
       }
     }
@@ -179,8 +179,8 @@ fetch('data/prov.json')
   .then(response => response.json())
   .then(provData => {
     const ctx = document.getElementById("provinceChart").getContext("2d");
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-    const monthKeys = ["1", "2", "3", "4", "5", "6", "7", "8"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+    const monthKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
     // Sort province names alphabetically
     const sortedProvinces = Object.keys(provData).sort();
@@ -297,7 +297,7 @@ fetch('data/prov.json')
     var s = null;
     var missing = 0;
     content = '<table><thead><tr><th class="table-head" style="width:220px">Border Crossing</th>';
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
     months.forEach(m => content += `<th class="table-head">${m}</th>`);
     content += '</tr></thead><tbody>';
 
@@ -309,7 +309,7 @@ fetch('data/prov.json')
         content += '<tr><td class="table-cell" style="width:350px;text-align:left;">' + f.name + " ("+f.state+") </td>";
         
         for(month in s[2025]) {
-          if (month < 9) {
+          if (month < 10) {
             var x = Math.round((s[2024][month].vehicle.car - s[2025][month].vehicle.car)/s[2024][month].vehicle.car*-1000)/10;
             const cls = getColorClass(x);
             content += `<td class="table-cell ${cls}">${x.toFixed(1)}%</td>`;
